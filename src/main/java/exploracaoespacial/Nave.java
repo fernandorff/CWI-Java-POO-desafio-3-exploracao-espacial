@@ -32,12 +32,12 @@ public class Nave {
 
             case 1:
                 roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
-                        .sorted(Comparator.comparing(Planeta::getValorTotal))
+                        .sorted(Comparator.comparing(Planeta::getValorTotal).reversed())
                         .collect(Collectors.toList());
                 break;
             case 2:
                 roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
-                        .sorted(Comparator.comparing(Planeta::getValorPorPeso))
+                        .sorted(Comparator.comparing(Planeta::getValorPorPeso).reversed())
                         .collect(Collectors.toList());
                 break;
             default:
@@ -57,6 +57,8 @@ public class Nave {
         organizarPrioridade(escolherPrioridade, args);
 
         for (Planeta arg : roteiroDeExploracaoComPrioridade) {
+
+            System.out.println(arg);
 
             // indo para o planeta destino
             while (this.getPosicao() != arg.getPosicao() && !this.aDeriva) {
@@ -113,6 +115,11 @@ public class Nave {
     public int getValorAcumuladoPorPeso() {
 
         return valorAcumuladoPorPeso;
+    }
+
+    public int getCombustivel() {
+
+        return combustivel;
     }
 
     public void setCombustivel(int combustivel) {this.combustivel = combustivel;}

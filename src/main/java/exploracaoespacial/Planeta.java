@@ -14,6 +14,8 @@ public class Planeta {
 
     private int valorTotal = 0;
 
+    private int pesoPlaneta = 0;
+
     private int valorPorPeso = 0;
 
     public Planeta(String nome, int posicao, Recurso... args) {
@@ -22,15 +24,23 @@ public class Planeta {
         this.posicao = posicao;
         this.recursos = Collections.unmodifiableList(Arrays.asList(args));
 
-        for (int i = 0; i < this.recursos.size(); i++) {
-            this.valorTotal += this.recursos.get(i).getValor();
-            this.valorPorPeso += (this.recursos.get(i).getValor() / this.recursos.get(i).getPeso());
+        for (Recurso recurso : this.recursos) {
+            this.valorTotal += recurso.getValor();
+            this.pesoPlaneta += recurso.getPeso();
+
+            this.valorPorPeso += (recurso.getValor() / this.getPesoPlaneta());
         }
 
     }
 
-    public String toString(){
+    public String toString() {
+
         return "Planeta --- Nome: " + nome + " - Posicao: " + posicao + " - Valor total: " + valorTotal + " - Valor por peso: " + valorPorPeso;
+    }
+
+    public int getPesoPlaneta() {
+
+        return pesoPlaneta;
     }
 
     public void setNome(String nome) {this.nome = nome;}

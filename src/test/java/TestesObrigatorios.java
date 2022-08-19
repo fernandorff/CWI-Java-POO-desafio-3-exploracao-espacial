@@ -18,8 +18,6 @@ public class TestesObrigatorios {
 
     Planeta terra = new Planeta("Terra", 2, agua, oxigenio);
 
-    Planeta marte = new Planeta("Marte", 4, silicio, ferro, ouro);
-
     Planeta jupiter = new Planeta("Jupiter", 8, oxigenio, ferro);
 
     Planeta lixo = new Planeta("Lixo", 5);
@@ -32,7 +30,7 @@ public class TestesObrigatorios {
         Nave nave = new Nave(30);
 
         System.out.println(nave);
-        System.out.println(jupiter);
+        System.out.println("Destino ---> " + jupiter);
 
         // prioridade -> 0 = posicao || 1 = valor total || 2 = valor por peso
         nave.explorar(0, jupiter);
@@ -60,7 +58,7 @@ public class TestesObrigatorios {
 
         int valorEsperado = 0;
 
-        Assert.assertEquals(valorEsperado,nave.getValorAcumulado());
+        Assert.assertEquals(valorEsperado, nave.getValorAcumulado());
 
     }
 
@@ -80,7 +78,7 @@ public class TestesObrigatorios {
 
         int valorEsperado = terra.getValorTotal();
 
-        Assert.assertEquals(valorEsperado,nave.getValorAcumulado());
+        Assert.assertEquals(valorEsperado, nave.getValorAcumulado());
 
     }
 
@@ -100,12 +98,12 @@ public class TestesObrigatorios {
 
         int valorEsperado = 0;
 
-        Assert.assertEquals(valorEsperado,nave.getValorAcumuladoPorPeso());
+        Assert.assertEquals(valorEsperado, nave.getValorAcumuladoPorPeso());
 
     }
 
     @Test
-    public void deveTerValorPorPesoQuandoExistirRecursosNoPlaneta(){
+    public void deveTerValorPorPesoQuandoExistirRecursosNoPlaneta() {
 
         System.out.println("\nTeste - Deve ter valor por peso quando existir recursos no planeta");
 
@@ -120,7 +118,7 @@ public class TestesObrigatorios {
 
         int valorEsperado = terra.getValorPorPeso();
 
-        Assert.assertEquals(valorEsperado,nave.getValorAcumuladoPorPeso());
+        Assert.assertEquals(valorEsperado, nave.getValorAcumuladoPorPeso());
 
     }
 

@@ -21,5 +21,4 @@ public class Recurso {
 
     public void setValor(int valor) {this.valor = valor;}
 
-
 }
