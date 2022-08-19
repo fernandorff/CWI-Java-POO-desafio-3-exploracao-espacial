@@ -1,13 +1,20 @@
 package exploracaoEspacial;
 
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Nave {
 
-    public int valorAcumulado;
+    List<Planeta> roteiroDeExploracao = new ArrayList<>();
 
-    public int valorAcumuladoPorPeso;
+    List<Planeta> roteiroDeExploracaoComPrioridade;
+
+    private int valorAcumulado;
+
+    private int valorAcumuladoPorPeso;
 
     private int combustivel;
 
@@ -17,20 +24,39 @@ public class Nave {
 
     public Nave(int combustivel) {setCombustivel(combustivel);}
 
-    public void explorar(int i,Planeta... args) {
+    public void organizarPrioridade(int prioridadeDefinida, Planeta... args) {
 
-        Math.min()
+        Collections.addAll(roteiroDeExploracao, args);
 
-        for (Planeta arg : args) {
+        // prioridade -> 0 = posicao || 1 = valor total || 2 = valor por peso
+        switch (prioridadeDefinida) {
+            case 0:
+                roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
+                        .sorted(Comparator.comparing(Planeta::getPOSICAO))
+                        .collect(Collectors.toList());
+                break;
 
-
-
+            case 1:
+                roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
+                        .sorted(Comparator.comparing(Planeta::getValorTotal))
+                        .collect(Collectors.toList());
+                break;
+            case 2:
+                roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
+                        .sorted(Comparator.comparing(Planeta::getValorPorPeso))
+                        .collect(Collectors.toList());
+                break;
         }
 
+    }
+
+    public void explorar(int escolherPrioridade, Planeta... args) {
+
+        organizarPrioridade(escolherPrioridade, args);
 
         if (!this.aDeriva) {
 
-            for (Planeta arg : args) {
+            for (Planeta arg : roteiroDeExploracaoComPrioridade) {
 
                 while (this.getPosicao() != arg.getPOSICAO() && !this.aDeriva) {
 
@@ -42,6 +68,7 @@ public class Nave {
                         this.combustivel -= 3;
                     }
                     this.setADerivaSeSemCombustivel();
+                    // System.out.println(this.toString());
 
                 }
 
@@ -58,28 +85,40 @@ public class Nave {
                     this.combustivel -= 3;
                 }
                 this.setADerivaSeSemCombustivel();
+                // System.out.println(this.toString());
+
             }
         }
     }
 
-    public boolean isaDeriva() {return aDeriva;}
-
     public void setADerivaSeSemCombustivel() {
 
-        if (this.combustivel < 3) {
-            this.aDeriva = true;
-        } else {
-            this.aDeriva = false;
-        }
+        this.aDeriva = this.combustivel < 3;
 
     }
 
-    public int getCombustivel() {return this.combustivel;}
+    public boolean isaDeriva() {
+
+        return aDeriva;
+    }
+
+    public int getValorAcumulado() {
+
+        return valorAcumulado;
+    }
+
+    public int getValorAcumuladoPorPeso() {
+
+        return valorAcumuladoPorPeso;
+    }
 
     public void setCombustivel(int combustivel) {this.combustivel = combustivel;}
 
     public int getPosicao() {return this.posicao;}
 
-    public void setPosicao(int posicao) {this.posicao = posicao;}
+    public String toString() {
+
+        return "Nave --- Posicao: " + posicao + " - Combustivel: " + combustivel + " - Esta a deriva? " + aDeriva + " - Valor acumulado: " + valorAcumulado + " - Valor acumulado por peso: " + valorAcumuladoPorPeso;
+    }
 
 }

@@ -29,7 +29,9 @@ public class Planeta {
 
     }
 
-    public String getNome() {return nome;}
+    public String toString(){
+        return "Planeta --- Nome: " + nome + " - Posicao: " + POSICAO + " - Valor total: " + valorTotal + " - Valor por peso: " + valorPorPeso;
+    }
 
     public void setNome(String nome) {this.nome = nome;}
 
