@@ -28,14 +28,12 @@ public class Nave {
 
         Collections.addAll(roteiroDeExploracao, args);
 
-        // prioridade -> 0 = posicao || 1 = valor total || 2 = valor por peso
         switch (prioridadeDefinida) {
-            case 0:
+            default:
                 roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
                         .sorted(Comparator.comparing(Planeta::getPOSICAO))
                         .collect(Collectors.toList());
                 break;
-
             case 1:
                 roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
                         .sorted(Comparator.comparing(Planeta::getValorTotal))
@@ -52,43 +50,46 @@ public class Nave {
 
     public void explorar(int escolherPrioridade, Planeta... args) {
 
+        escolherPrioridade = Math.min(escolherPrioridade, 2);
+
         organizarPrioridade(escolherPrioridade, args);
 
-        if (!this.aDeriva) {
+        for (Planeta arg : roteiroDeExploracaoComPrioridade) {
 
-            for (Planeta arg : roteiroDeExploracaoComPrioridade) {
+            // indo para o planeta destino
+            while (this.getPosicao() != arg.getPOSICAO() && !this.aDeriva) {
 
-                while (this.getPosicao() != arg.getPOSICAO() && !this.aDeriva) {
-
-                    if (this.getPosicao() < arg.getPOSICAO()) {
-                        this.posicao += 1;
-                        this.combustivel -= 3;
-                    } else {
-                        this.posicao -= 1;
-                        this.combustivel -= 3;
-                    }
-                    this.setADerivaSeSemCombustivel();
-                    // System.out.println(this.toString());
-
-                }
-
-                if (((this.getPosicao() - arg.getPOSICAO()) == 0)) {
-                    this.valorAcumulado += arg.getValorTotal();
-                    this.valorAcumuladoPorPeso += arg.getValorPorPeso();
-                }
+                moverUmaPosicao(arg.getPOSICAO());
 
             }
-            while (this.getPosicao() != 0 && !this.aDeriva) {
 
-                if (this.getPosicao() > 0) {
-                    this.posicao -= 1;
-                    this.combustivel -= 3;
-                }
-                this.setADerivaSeSemCombustivel();
-                // System.out.println(this.toString());
-
+            // chegou ao planeta destino e coletou os recursos
+            if (((this.getPosicao() - arg.getPOSICAO()) == 0)) {
+                this.valorAcumulado += arg.getValorTotal();
+                this.valorAcumuladoPorPeso += arg.getValorPorPeso();
             }
+
         }
+
+        // voltando para posicao inicial
+        while (this.getPosicao() != 0 && !this.aDeriva) {
+
+            moverUmaPosicao(0);
+
+        }
+    }
+
+    public void moverUmaPosicao(int posicaoDestino) {
+
+        if (this.getPosicao() < posicaoDestino) {
+            this.posicao += 1;
+            this.combustivel -= 3;
+        } else {
+            this.posicao -= 1;
+            this.combustivel -= 3;
+        }
+        this.setADerivaSeSemCombustivel();
+
     }
 
     public void setADerivaSeSemCombustivel() {
