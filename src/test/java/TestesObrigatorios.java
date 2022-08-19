@@ -1,6 +1,6 @@
-import exploracaoEspacial.Nave;
-import exploracaoEspacial.Planeta;
-import exploracaoEspacial.Recurso;
+import exploracaoespacial.Nave;
+import exploracaoespacial.Planeta;
+import exploracaoespacial.Recurso;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,6 +32,7 @@ public class TestesObrigatorios {
         Nave nave = new Nave(30);
 
         System.out.println(nave);
+        System.out.println(jupiter);
 
         // prioridade -> 0 = posicao || 1 = valor total || 2 = valor por peso
         nave.explorar(0, jupiter);

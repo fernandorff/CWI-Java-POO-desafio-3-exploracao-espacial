@@ -1,4 +1,4 @@
-package exploracaoEspacial;
+package exploracaoespacial;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,11 +29,7 @@ public class Nave {
         Collections.addAll(roteiroDeExploracao, args);
 
         switch (prioridadeDefinida) {
-            default:
-                roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
-                        .sorted(Comparator.comparing(Planeta::getPOSICAO))
-                        .collect(Collectors.toList());
-                break;
+
             case 1:
                 roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
                         .sorted(Comparator.comparing(Planeta::getValorTotal))
@@ -44,6 +40,12 @@ public class Nave {
                         .sorted(Comparator.comparing(Planeta::getValorPorPeso))
                         .collect(Collectors.toList());
                 break;
+            default:
+                roteiroDeExploracaoComPrioridade = roteiroDeExploracao.stream()
+                        .sorted(Comparator.comparing(Planeta::getPosicao))
+                        .collect(Collectors.toList());
+                break;
+
         }
 
     }
@@ -57,14 +59,14 @@ public class Nave {
         for (Planeta arg : roteiroDeExploracaoComPrioridade) {
 
             // indo para o planeta destino
-            while (this.getPosicao() != arg.getPOSICAO() && !this.aDeriva) {
+            while (this.getPosicao() != arg.getPosicao() && !this.aDeriva) {
 
-                moverUmaPosicao(arg.getPOSICAO());
+                moverUmaPosicao(arg.getPosicao());
 
             }
 
             // chegou ao planeta destino e coletou os recursos
-            if (((this.getPosicao() - arg.getPOSICAO()) == 0)) {
+            if (((this.getPosicao() - arg.getPosicao()) == 0)) {
                 this.valorAcumulado += arg.getValorTotal();
                 this.valorAcumuladoPorPeso += arg.getValorPorPeso();
             }

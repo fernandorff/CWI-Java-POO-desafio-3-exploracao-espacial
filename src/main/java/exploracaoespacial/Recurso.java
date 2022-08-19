@@ -1,4 +1,4 @@
-package exploracaoEspacial;
+package exploracaoespacial;
 
 public class Recurso {
 
