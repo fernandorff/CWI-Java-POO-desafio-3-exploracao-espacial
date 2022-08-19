@@ -2,15 +2,12 @@ package exploracaoespacial;
 
 public class Recurso {
 
-    private String nome;
-
     private int valor;
 
     private int peso;
 
-    public Recurso(String nome, int valor, int peso) {
+    public Recurso(int valor, int peso) {
 
-        setNome(nome);
         setPeso(peso);
         setValor(valor);
 
@@ -24,6 +21,5 @@ public class Recurso {
 
     public void setValor(int valor) {this.valor = valor;}
 
-    public void setNome(String nome) {this.nome = nome;}
 
 }

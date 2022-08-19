@@ -6,15 +6,15 @@ import org.junit.Test;
 
 public class TestesObrigatorios {
 
-    Recurso agua = new Recurso("Agua", 80, 10);
+    Recurso agua = new Recurso(80, 10);
 
-    Recurso oxigenio = new Recurso("Oxigenio", 50, 2);
+    Recurso oxigenio = new Recurso(50, 2);
 
-    Recurso silicio = new Recurso("Silicio", 60, 15);
+    Recurso silicio = new Recurso(60, 15);
 
-    Recurso ouro = new Recurso("Ouro", 120, 20);
+    Recurso ouro = new Recurso(120, 20);
 
-    Recurso ferro = new Recurso("Ferro", 30, 30);
+    Recurso ferro = new Recurso(30, 30);
 
     Planeta terra = new Planeta("Terra", 2, agua, oxigenio);
 
