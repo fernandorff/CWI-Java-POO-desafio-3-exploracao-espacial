@@ -24,9 +24,9 @@ public class Nave {
 
     public Nave(int combustivel) {setCombustivel(combustivel);}
 
-    public void organizarPrioridade(int prioridadeDefinida, Planeta... args) {
+    public void organizarPrioridade(int prioridadeDefinida, Planeta... argsPlanetas) {
 
-        Collections.addAll(roteiroDeExploracao, args);
+        Collections.addAll(roteiroDeExploracao, argsPlanetas);
 
         switch (prioridadeDefinida) {
 
@@ -50,27 +50,25 @@ public class Nave {
 
     }
 
-    public void explorar(int escolherPrioridade, Planeta... args) {
+    public void explorar(int escolherPrioridade, Planeta... argsPlanetas) {
 
         escolherPrioridade = Math.min(escolherPrioridade, 2);
 
-        organizarPrioridade(escolherPrioridade, args);
+        organizarPrioridade(escolherPrioridade, argsPlanetas);
 
-        for (Planeta arg : roteiroDeExploracaoComPrioridade) {
-
-            System.out.println(arg);
+        for (Planeta argPlaneta : roteiroDeExploracaoComPrioridade) {
 
             // indo para o planeta destino
-            while (this.getPosicao() != arg.getPosicao() && !this.aDeriva) {
+            while (this.getPosicao() != argPlaneta.getPosicao() && !this.aDeriva) {
 
-                moverUmaPosicao(arg.getPosicao());
+                moverUmaPosicao(argPlaneta.getPosicao());
 
             }
 
             // chegou ao planeta destino e coletou os recursos
-            if (((this.getPosicao() - arg.getPosicao()) == 0)) {
-                this.valorAcumulado += arg.getValorTotal();
-                this.valorAcumuladoPorPeso += arg.getValorPorPeso();
+            if (((this.getPosicao() - argPlaneta.getPosicao()) == 0)) {
+                this.valorAcumulado += argPlaneta.getValorTotal();
+                this.valorAcumuladoPorPeso += argPlaneta.getValorPorPeso();
             }
 
         }

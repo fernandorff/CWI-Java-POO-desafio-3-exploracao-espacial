@@ -35,6 +35,8 @@ public class TestesBonus {
         nave.explorar(0, terra, jupiter, lixo);
         System.out.println(nave);
 
+        Assert.assertEquals(140, nave.getCombustivel());
+
     }
 
     @Test

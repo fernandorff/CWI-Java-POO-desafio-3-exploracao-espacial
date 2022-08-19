@@ -27,7 +27,6 @@ public class Planeta {
         for (Recurso recurso : this.recursos) {
             this.valorTotal += recurso.getValor();
             this.pesoPlaneta += recurso.getPeso();
-
             this.valorPorPeso += (recurso.getValor() / this.getPesoPlaneta());
         }
 
